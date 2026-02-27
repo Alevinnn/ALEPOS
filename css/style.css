@@ -81,9 +81,9 @@ body {
     background: white;
     padding: 30px;
     border-radius: 12px;
-    width: 80%;
-    max-width: 800px;
-    margin: 40px auto;
+    width: 90%;
+    max-width: 900px;
+    margin: 50px auto;
     box-shadow: 0 10px 25px rgba(0,0,0,0.1);
 }
 
@@ -109,4 +109,10 @@ button {
 
 button:hover {
     transform: scale(1.03);
+}
+.dashboard-container {
+    width: 90%;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
 }
