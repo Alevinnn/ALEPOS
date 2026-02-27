@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>ALEPOS - Login</title>
+    <Link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="login-container">
+        <h1>ALEPOS</h1>
+        <p>Sistem kasir sederhana untuk UMKM</p>
+
+        <form onsubmit="return login()">
+            <input type="text" id="username" placeholder="username" required>
+            <input type="password" id="password" placeholder="password" required>
+            <button type="submit">Masuk</button>
+        </form>
+
+        <p id="eror-message"></p>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

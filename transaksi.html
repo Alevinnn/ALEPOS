@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Transaksi - AlePOS</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="dashboard-container">
+        <h1>Halaman Transaksi</h1>
+
+        <div class="form-produk">
+            <select id="pilihProduk"></select>
+            <input type="number" id="jumlahTransaksi" placeholder="Jumlah">
+            <button onclick="hitungTotal()">Hitung Total</button>
+        </div>
+
+        <h2 id="totalBayar">Total: Rp 0</h2>
+        <br>
+        <button onclick="simpanTransaksi()">Bayar</button>
+
+        <h3>Filter Tanggal</h3>
+        <input type="date" id="filterTanggal">
+        <button onclick="filterTransaksi()">Filter</button>
+        <button onclick="resetFilter()">Reset</button>
+        <h3>Riwayat Transaksi</h3>
+        <table border="1" width="100%">
+            
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Tanggal</th>
+                    <th>Produk</th>
+                    <th>Jumlah</th>
+                    <th>Total</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody id="tabelTransaksi">
+            </tbody>
+        </table>
+
+        <h3 id="totalOmzet">Total Omzet: Rp 0</h3>
+        <br>
+        <a href="dashboard.html">⬅ Kembali ke Dashboard</a>
+    </div>
+
+    <script src="js/transaksi.js"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Data Produk - AlePOS</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="dashboard-container">
+        <h1>Data Produk</h1>
+
+        <div class="form-produk">
+            <input type="text" id="namaProduk" placeholder="Nama Produk">
+            <input type="number" id="hargaProduk" placeholder="Harga">
+            <button onclick="tambahProduk()">Tambah Produk</button>
+        </div>
+
+        <table border="1" width="100%" style="margin-top:20px;">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Nama Produk</th>
+                    <th>Harga</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody id="tabelProduk">
+            </tbody>
+        </table>
+
+        <br>
+        <a href="dashboard.html">⬅ Kembali ke Dashboard</a>
+    </div>
+
+    <script src="js/produk.js"></script>
+</body>
+</html>
