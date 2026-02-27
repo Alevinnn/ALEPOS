@@ -2,6 +2,10 @@ body {
     margin: 0;
     font-family: Arial, sans-serif;
     background: linear-gradient(to right, #eef2f3, #dfe9f3);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
     min-height: 100vh;
 }
 
@@ -78,12 +82,11 @@ body {
 }
 
 .dashboard-container {
+    width: 90%;
+    max-width: 900px;
     background: white;
     padding: 30px;
     border-radius: 12px;
-    width: 90%;
-    max-width: 900px;
-    margin: 50px auto;
     box-shadow: 0 10px 25px rgba(0,0,0,0.1);
 }
 
