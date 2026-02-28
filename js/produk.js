@@ -25,11 +25,14 @@ async function tampilkanProduk() {
     const querySnapshot = await getDocs(collection(db, "produk"));
     tabel.innerHTML = "";
 
+    let no = 1;
+
     querySnapshot.forEach((docSnap) => {
         const data = docSnap.data();
 
         tabel.innerHTML += `
             <tr>
+                <td>${no++}</td>
                 <td>${data.nama}</td>
                 <td>Rp ${data.harga.toLocaleString()}</td>
                 <td>
