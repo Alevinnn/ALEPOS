@@ -162,3 +162,41 @@ table {
 .dashboard-container {
     overflow-x: auto;
 }
+
+/* MOBILE CARD STYLE */
+#transaksiMobile {
+    display: none;
+}
+
+.trx-card {
+    background: white;
+    padding: 15px;
+    margin-bottom: 12px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.trx-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 16px;
+}
+
+.trx-body {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+
+    table {
+        display: none;
+    }
+
+    #transaksiMobile {
+        display: block;
+    }
+
+}
