@@ -70,7 +70,10 @@ async function simpanTransaksi() {
 
 async function tampilkanRiwayat() {
     const tabel = document.getElementById("tabelTransaksi");
+    const mobileContainer = document.getElementById("transaksiMobile");
+
     tabel.innerHTML = "";
+    mobileContainer.innerHTML = "";
 
     const snapshot = await getDocs(collection(db, "transaksi"));
     riwayatTransaksi = [];
@@ -84,6 +87,7 @@ async function tampilkanRiwayat() {
     riwayatTransaksi.forEach((trx, index) => {
         omzet += trx.total;
 
+        // Desktop Table
         tabel.innerHTML += `
             <tr>
                 <td>${index + 1}</td>
@@ -97,6 +101,23 @@ async function tampilkanRiwayat() {
                     </button>
                 </td>
             </tr>
+        `;
+
+        // Mobile Card
+        mobileContainer.innerHTML += `
+            <div class="trx-card">
+                <div class="trx-header">
+                    <strong>${trx.nama}</strong>
+                    <span>Rp ${formatRupiah(trx.total)}</span>
+                </div>
+                <div class="trx-body">
+                    Jumlah: ${trx.jumlah}<br>
+                    ${trx.tanggal}
+                </div>
+                <button onclick="hapusTransaksi('${trx.id}')">
+                    Hapus
+                </button>
+            </div>
         `;
     });
 
