@@ -128,6 +128,7 @@ function resetFilter() {
     tampilkanRiwayat();
 }
 
+window.hitungTotal = hitungTotal;
 window.hapusTransaksi = hapusTransaksi;
 
 tampilkanDropdown();
