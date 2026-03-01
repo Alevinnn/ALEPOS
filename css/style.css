@@ -119,3 +119,46 @@ button:hover {
     margin-left: auto;
     margin-right: auto;
 }
+
+/* RESPONSIVE MOBILE */
+@media (max-width: 768px) {
+
+    .dashboard-container {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 22px;
+        text-align: center;
+    }
+
+    .form-produk {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    input, select, button {
+        width: 100%;
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    table {
+        font-size: 14px;
+    }
+
+    th, td {
+        padding: 8px;
+    }
+
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.dashboard-container {
+    overflow-x: auto;
+}
