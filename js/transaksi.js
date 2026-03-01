@@ -131,6 +131,7 @@ function resetFilter() {
     tampilkanRiwayat();
 }
 
+window.hitungTotal = hitungTotal;
 window.hapusTransaksi = hapusTransaksi;
 window.simpanTransaksi = simpanTransaksi;
 window.filterTransaksi = filterTransaksi;
