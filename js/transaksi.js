@@ -64,7 +64,7 @@ async function simpanTransaksi() {
     };
 
     await addDoc(collection(db, "transaksi"), transaksiBaru);
-
+    alert("Transaksi berhasil disimpan!");
     tampilkanRiwayat();
 }
 
@@ -96,7 +96,7 @@ async function tampilkanRiwayat() {
                 <td>${trx.jumlah}</td>
                 <td>Rp ${formatRupiah(trx.total)}</td>
                 <td>
-                    <button onclick="hapusTransaksi('${trx.id}')">
+                    <button class="btn-danger" onclick="hapusTransaksi('${trx.id}')">
                         Hapus
                     </button>
                 </td>
@@ -126,6 +126,9 @@ async function tampilkanRiwayat() {
 }
 
 async function hapusTransaksi(id) {
+    const yakin = confirm("Yakin mau hapus transaksi ini?");
+    if (!yakin) return;
+
     await deleteDoc(doc(db, "transaksi", id));
     tampilkanRiwayat();
 }
