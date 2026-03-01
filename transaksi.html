@@ -11,8 +11,8 @@
         <h1>Halaman Transaksi</h1>
 
         <div class="form-produk">
-            <select id="pilihProduk"></select>
-            <input type="number" id="jumlahTransaksi" placeholder="Jumlah">
+            <select id="pilihProduk" onchange="hitungTotal()"></select>
+            <input type="number" id="jumlahTransaksi" oninput="hitungTotal()">
             <button onclick="hitungTotal()">Hitung Total</button>
         </div>
 
