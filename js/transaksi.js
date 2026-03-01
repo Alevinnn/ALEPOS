@@ -32,13 +32,16 @@ function hitungTotal() {
     const index = document.getElementById("pilihProduk").value;
     const jumlah = document.getElementById("jumlahTransaksi").value;
 
-    if (jumlah === "") {
-        alert("Masukkan jumlah!");
+    if (!jumlah || daftarProduk.length === 0) {
+        document.getElementById("totalBayar").textContent =
+            "Total: Rp 0";
         return;
     }
 
-    const harga = daftarProduk[index].harga;
-    const total = harga * jumlah;
+    const produk = daftarProduk[index];
+    if (!produk) return;
+
+    const total = produk.harga * jumlah;
 
     document.getElementById("totalBayar").textContent =
         "Total: Rp " + formatRupiah(total);
