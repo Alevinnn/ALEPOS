@@ -101,9 +101,6 @@ async function tampilkanRiwayat() {
         "Total Omzet: Rp " + formatRupiah(omzet);
 }
 
-tampilkanDropdown();
-tampilkanRiwayat();
-
 async function hapusTransaksi(id) {
     await deleteDoc(doc(db, "transaksi", id));
     tampilkanRiwayat();
