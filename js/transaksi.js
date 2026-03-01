@@ -1,17 +1,28 @@
 function formatRupiah(angka) {
     return new Intl.NumberFormat("id-ID").format(angka);
 }
-let daftarProduk = JSON.parse(localStorage.getItem("produk")) || [];
-let riwayatTransaksi = JSON.parse(localStorage.getItem("transaksi")) || [];
+import { db } from "./firebase.js";
+import { collection, getDocs, addDoc, deleteDoc, doc }
+from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-function tampilkanDropdown() {
+let daftarProduk = [];
+let riwayatTransaksi = [];
+
+async function tampilkanDropdown() {
     const select = document.getElementById("pilihProduk");
     select.innerHTML = "";
+
+    const snapshot = await getDocs(collection(db, "produk"));
+    daftarProduk = [];
+
+    snapshot.forEach((docSnap) => {
+        daftarProduk.push({ id: docSnap.id, ...docSnap.data() });
+    });
 
     daftarProduk.forEach((produk, index) => {
         select.innerHTML += `
             <option value="${index}">
-                ${produk.nama} - Rp ${produk.harga}
+                ${produk.nama} - Rp ${formatRupiah(produk.harga)}
             </option>
         `;
     });
@@ -33,57 +44,52 @@ function hitungTotal() {
         "Total: Rp " + formatRupiah(total);
 }
 
-function simpanTransaksi() {
+async function simpanTransaksi() {
     const index = document.getElementById("pilihProduk").value;
     const jumlah = document.getElementById("jumlahTransaksi").value;
 
-    if (jumlah === "") {
-        alert("Masukkan jumlah!");
-        return;
-    }
+    if (!jumlah) return alert("Masukkan jumlah!");
 
     const produk = daftarProduk[index];
     const total = produk.harga * jumlah;
 
-    const sekarang = new Date();
-    const tanggal = sekarang.toLocaleString("id-ID");
-
     const transaksiBaru = {
-        tanggal: tanggal,
+        tanggal: new Date().toLocaleString("id-ID"),
         nama: produk.nama,
-        jumlah: jumlah,
+        jumlah: parseInt(jumlah),
         total: total
     };
 
-    riwayatTransaksi.push(transaksiBaru);
-    localStorage.setItem("transaksi", JSON.stringify(riwayatTransaksi));
+    await addDoc(collection(db, "transaksi"), transaksiBaru);
 
     tampilkanRiwayat();
-
-    document.getElementById("jumlahTransaksi").value = "";
-    document.getElementById("totalBayar").textContent = "Total: Rp 0";
 }
 
-function tampilkanRiwayat(data = riwayatTransaksi) {
+async function tampilkanRiwayat() {
     const tabel = document.getElementById("tabelTransaksi");
     tabel.innerHTML = "";
 
+    const snapshot = await getDocs(collection(db, "transaksi"));
+    riwayatTransaksi = [];
+
+    snapshot.forEach((docSnap) => {
+        riwayatTransaksi.push({ id: docSnap.id, ...docSnap.data() });
+    });
+
     let omzet = 0;
 
-    data.forEach((trx) => {
-        omzet += parseInt(trx.total);
-
-        const indexAsli = riwayatTransaksi.indexOf(trx);
+    riwayatTransaksi.forEach((trx, index) => {
+        omzet += trx.total;
 
         tabel.innerHTML += `
             <tr>
-                <td>${indexAsli + 1}</td>
+                <td>${index + 1}</td>
                 <td>${trx.tanggal}</td>
                 <td>${trx.nama}</td>
                 <td>${trx.jumlah}</td>
                 <td>Rp ${formatRupiah(trx.total)}</td>
                 <td>
-                    <button onclick="hapusTransaksi(${indexAsli})">
+                    <button onclick="hapusTransaksi('${trx.id}')">
                         Hapus
                     </button>
                 </td>
@@ -98,9 +104,8 @@ function tampilkanRiwayat(data = riwayatTransaksi) {
 tampilkanDropdown();
 tampilkanRiwayat();
 
-function hapusTransaksi(index) {
-    riwayatTransaksi.splice(index, 1);
-    localStorage.setItem("transaksi", JSON.stringify(riwayatTransaksi));
+async function hapusTransaksi(id) {
+    await deleteDoc(doc(db, "transaksi", id));
     tampilkanRiwayat();
 }
 
@@ -125,3 +130,8 @@ function resetFilter() {
     document.getElementById("filterTanggal").value = "";
     tampilkanRiwayat();
 }
+
+window.hapusTransaksi = hapusTransaksi;
+
+tampilkanDropdown();
+tampilkanRiwayat();
