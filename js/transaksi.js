@@ -51,7 +51,10 @@ async function simpanTransaksi() {
     const index = document.getElementById("pilihProduk").value;
     const jumlah = document.getElementById("jumlahTransaksi").value;
 
-    if (!jumlah) return alert("Masukkan jumlah!");
+    if (!jumlah || jumlah <= 0) {
+    alert("Jumlah harus lebih dari 0!");
+    return;
+    }
 
     const produk = daftarProduk[index];
     const total = produk.harga * jumlah;
