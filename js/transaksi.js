@@ -64,7 +64,15 @@ async function simpanTransaksi() {
     };
 
     await addDoc(collection(db, "transaksi"), transaksiBaru);
+
     alert("Transaksi berhasil disimpan!");
+
+    // reset input
+    document.getElementById("jumlahTransaksi").value = "";
+    document.getElementById("pilihProduk").selectedIndex = 0;
+    document.getElementById("totalBayar").textContent = "Total: Rp 0";
+
+    // refresh riwayat
     tampilkanRiwayat();
 }
 
