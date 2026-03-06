@@ -68,19 +68,24 @@ async function simpanTransaksi() {
     tampilkanRiwayat();
 }
 
-async function tampilkanRiwayat() {
+async function tampilkanRiwayat(data = null) {
     const tabel = document.getElementById("tabelTransaksi");
     const mobileContainer = document.getElementById("transaksiMobile");
 
     tabel.innerHTML = "";
     mobileContainer.innerHTML = "";
 
+if (!data) {
     const snapshot = await getDocs(collection(db, "transaksi"));
     riwayatTransaksi = [];
 
     snapshot.forEach((docSnap) => {
         riwayatTransaksi.push({ id: docSnap.id, ...docSnap.data() });
     });
+
+} else {
+    riwayatTransaksi = data;
+}
 
     let omzet = 0;
 
